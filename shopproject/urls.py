@@ -6,8 +6,8 @@ from shopproject import settings
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('products/', include('shop.urls')),
-    path('staff/', include('shop.urls_staff'))
+    path('staff/', include('shop.urls_staff')),
+    path('', include('shop.urls')),
 ]
 
 if settings.DEBUG:
