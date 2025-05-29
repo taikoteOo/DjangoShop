@@ -30,10 +30,10 @@ class Product(models.Model):
     slug = models.SlugField(max_length=200, unique=True, editable=False)
     image = models.ImageField(upload_to='products', blank=True, null=True,verbose_name='Изображение')
     price = models.DecimalField(max_digits=10, decimal_places=2, verbose_name='Стоимость')
-    available = models.BinaryField(default=True, verbose_name='Доступность')
+    available = models.BooleanField(default=True, verbose_name='Доступность')
     created_ad = models.DateTimeField(auto_now_add=True, editable=False)
     update = models.DateTimeField(auto_now=True, editable=False)
-    category = models.ForeignKey(Category, related_name='products', on_delete=models.CASCADE)
+    category = models.ForeignKey(Category, related_name='products', on_delete=models.CASCADE, verbose_name='Категория товара')
 
     class Meta:
         ordering = ['category','name']
@@ -55,5 +55,4 @@ class Product(models.Model):
         super().save(*args, **kwargs)
 
     def get_absolute_url(self):
-        pass
-        # return reverse('shop:product_detail', kwargs={'slug': self.slug})
+        return reverse('staff:product_detail', kwargs={'slug': self.slug})
