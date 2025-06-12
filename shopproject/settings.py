@@ -130,3 +130,9 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_MODEL = 'users.CustomUser'
 CART_SESSION_ID = 'cart'
+
+# путь, куда попадёт пользователь после аутентификации
+LOGIN_REDIRECT_URL = 'shop:index'
+
+# куда направить пользователя, если его действие на сайте требует аутентификации
+LOGIN_URL = 'users:login'

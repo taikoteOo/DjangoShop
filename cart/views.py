@@ -8,7 +8,7 @@ from shopproject.settings import CART_SESSION_ID
 
 class Cart:
     """
-    Класс карзины для анонимного пользователя (неавторизованного)
+    Класс корзины для анонимного пользователя (неавторизованного)
     """
     def __init__(self, request):
         # получаем текущую сессию
@@ -21,7 +21,7 @@ class Cart:
             cart = self.session[CART_SESSION_ID] = {}
         self.cart = cart
 
-    # сохрфнение изменей в сессии
+    # сохранение изменений в сессии
     def save(self):
         self.session.modified = True
 

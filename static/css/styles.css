@@ -2,6 +2,8 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    background-color: #0a0a0a;
+    color: #f3f4f6
 }
 
 a {
@@ -11,7 +13,7 @@ a {
 
 header {
     padding: 10px 20px;
-    background-color: #333;
+    background-color: #0a0a0a;
 
 }
 
@@ -26,4 +28,21 @@ header {
     text-decoration: none;
     padding: 10px 15px;
     transition: background-color 0.3s;
+}
+
+h1, h3 {
+    color: #ffc107;
+}
+
+.icon {
+    width: 25px;
+}
+
+.info-item {
+    display: flex;
+    align-items: center;
+}
+
+.text-ifo {
+    padding: 5px;
 }
