@@ -11,41 +11,59 @@
 <body>
 <header>
     <div class="nav-menu">
-        <div class="logo-and-name"><h1><a href="">Бар Эклектика</a></h1></div>
-        <div class="menu-item"><a href="">Главная</a></div>
+        <div class="logo-and-name"><h1><a href="{% url 'shop:index' %}">Бар Эклектика</a></h1></div>
+        <div class="menu-item"><a href="{% url 'shop:index' %}">Главная</a></div>
         <div class="menu-item"><a href="">Меню</a></div>
         <div class="menu-item"><a href="">События</a></div>
         <div class="menu-item"><a href="">Корзина</a></div>
         <div class="menu-item"><a href="">Личный кабинет</a></div>
     </div>
 </header>
-{% block content %}
-{% endblock content %}
+<div class="content">
+    {% block content %}
+    {% endblock content %}
+</div>
+
 <footer>
-    <div class="info">
-        <div class="info-item"><h3>Бар Эклектика</h3></div>
-        <div class="info-item-fun"><p>Хочешь пить? У нас есть Пенное!</p>
-            <p>Проголодался? У нас есть снэки! </p>
-            <p>Приуныл? У нас есть Пенное!</p></div>
-        <div class="info-item"><img src="{% static 'img/address.png' %}" class="icon"><a href="https://yandex.ru/maps/-/CHSdVWkW" class="text-ifo" target="_blank">Санкт-Петербург, пр-кт Маршала Блюхера, 9к1</a></div>
-        <div class="info-item"><img src="{% static 'img/telegram.png' %}" class="icon"><a href="https://t.me/eclecticabeer" class="text-ifo" target="_blank">@eclecticabeer</a></div>
-        <div class="info-item"><img src="{% static 'img/vk.png' %}" class="icon"><a href="https://vk.com/eclecticabar" class="text-ifo" target="_blank">eclecticabar</a></div>
-    </div>
-    <div class="business-hours">
-        <div class="info-item"><h4>Часы работы</h4></div>
-        <div class="info-item">
-            <span>Воскресенье - Четверг</span>
-            <span>14:00 - 01:00</span>
+    <div class="container">
+        <div class="info">
+            <div class="info-item"><h3>Бар Эклектика</h3></div>
+            <div class="info-item-fun">
+                <p>Хочешь пить? У нас есть Пенное!</p>
+                <p>Проголодался? У нас есть снэки!</p>
+                <p>Приуныл? У нас есть Пенное!</p>
+            </div>
+            <div class="info-item">
+                <img src="{% static 'img/address.png' %}" class="icon">
+                <a href="https://yandex.ru/maps/-/CHSdVWkW"  class="text-ifo" target="_blank">Санкт-Петербург, пр-кт Маршала Блюхера, 9к1</a>
+            </div>
+            <div class="info-item">
+                <img src="{% static 'img/telegram.png' %}" class="icon">
+                <a href="https://t.me/eclecticabeer"  class="text-ifo" target="_blank">@eclecticabeer</a>
+            </div>
+            <div class="info-item">
+                <img src="{% static 'img/vk.png' %}" class="icon">
+                <a href="https://vk.com/eclecticabar"  class="text-ifo" target="_blank">eclecticabar</a>
+            </div>
         </div>
-        <div class="info-item">
-            <span>Пятница - Суббота</span>
-            <span>14:00 - 03:00</span>
+        <div class="business-hours">
+            <div class="info-item"><h4>Часы работы</h4></div>
+            <div class="info-item">
+                <span>Воскресенье - Четверг</span>
+                <span>14:00 - 01:00</span>
+            </div>
+            <div class="info-item">
+                <span>Пятница - Суббота</span>
+                <span>14:00 - 03:00</span>
+            </div>
+            <div class="info-item">Но мы всегда готовы задержаться ради дорогих гостей!</div>
         </div>
-        <div class="info-item">Но мы всегда готовы задержаться ради дорогих гостей!</div>
-    </div>
-    <div class="map">
-        <div><h4>Мы на карте</h4></div>
-        <div><iframe src="https://yandex.ru/map-widget/v1/?um=constructor%3A3f42e48d9f89e530247556d93c1b5a76267c50e8e786ce19120d222d4b619f25&amp;source=constructor" width="250" height="200" frameborder="0"></iframe></div>
+        <div class="map">
+            <div><h4>Мы на карте</h4></div>
+            <div>
+                <iframe src="https://yandex.ru/map-widget/v1/?um=constructor%3A3f42e48d9f89e530247556d93c1b5a76267c50e8e786ce19120d222d4b619f25&amp;source=constructor" width="250" height="200" frameborder="0"></iframe>
+            </div>
+        </div>
     </div>
 </footer>
 </body>
