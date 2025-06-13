@@ -1,11 +1,14 @@
 {% extends 'shop/base.html' %}
 
 {% block content %}
-<h3>Регистрация пользователя</h3>
-<form method="post">
-    {%csrf_token%}
-    {{register_form}}
-    <button type="submit">Зарегестрироваться</button>
-</form>
+<div class="forms">
+    <h3>Регистрация пользователя</h3>
+    <form method="post" enctype="multipart/form-data">
+        {%csrf_token%}
+        {{register_form.as_p}}
+        <button type="submit">Зарегестрироваться</button>
+    </form>
+</div>
+
 
 {% endblock content %}

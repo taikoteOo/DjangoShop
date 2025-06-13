@@ -12,8 +12,12 @@ from django.core.exceptions import PermissionDenied
 def register(request):
     # Когда отправляем форму на сервер
     if request.method == 'POST':
+        print("POST data:", request.POST)  # данные формы
+        print("FILES data:", request.FILES)
         # создаём объект формы с данными из запроса
-        form = RegistrationForm(request.POST)
+        form = RegistrationForm(request.POST, request.FILES)
+        print("Form is valid?", form.is_valid())  # <-- Отладка
+        print(form.errors)
         # если форма валидна
         if form.is_valid():
             # создаём объект пользователя без записи в ДБ
