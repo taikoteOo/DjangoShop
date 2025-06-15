@@ -59,7 +59,7 @@ def log_in(request):
 @login_required
 def log_out(request):
     logout(request)
-    return redirect('b_board:index')
+    return redirect('shop:index')
 
 @login_required
 def user_profile(request, pk):

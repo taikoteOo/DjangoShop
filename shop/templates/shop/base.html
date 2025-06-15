@@ -7,6 +7,7 @@
     {% endblock title %}
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <script src="{% static 'js/pop-up.js' %}" type="text/javascript"></script>
 </head>
 <body>
 <header>
@@ -15,8 +16,14 @@
         <div class="menu-item"><a href="{% url 'shop:index' %}">Главная</a></div>
         <div class="menu-item"><a href="">Меню</a></div>
         <div class="menu-item"><a href="">События</a></div>
+        {% if not user.is_authenticated%}
+        <div class="menu-item"><a href="{% url 'users:login' %}">Вход</a></div>
+        <div class="menu-item"><a href="{% url 'users:register' %}">Регистрация</a></div>
+        {% else %}
         <div class="menu-item"><a href="">Корзина</a></div>
         <div class="menu-item"><a href="">Личный кабинет</a></div>
+        <div class="menu-item"><a href="{% url 'users:logout' %}">Выйти</a></div>
+        {% endif %}
     </div>
 </header>
 <div class="content">
