@@ -7,7 +7,7 @@
     {% endblock title %}
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
-    <script src="{% static 'js/pop-up.js' %}" type="text/javascript"></script>
+
 </head>
 <body>
 <header>
@@ -18,7 +18,7 @@
         <div class="menu-item"><a href="">События</a></div>
         {% if not user.is_authenticated%}
         <div class="menu-item"><a href="{% url 'users:login' %}">Вход</a></div>
-        <div class="menu-item"><a href="{% url 'users:register' %}">Регистрация</a></div>
+        <div class="menu-item"><div class="button"><a href="#" id="open_pop_up">Регистрация</a></div></div>
         {% else %}
         <div class="menu-item"><a href="">Корзина</a></div>
         <div class="menu-item"><a href="">Личный кабинет</a></div>
@@ -26,6 +26,17 @@
         {% endif %}
     </div>
 </header>
+
+<div class="pop_up" id='pop_up'>
+    <div class="pop_up_container">
+        <div class="pop_up_body" id="pop_up_body">
+
+
+            <div class="pop_up_close" id="pop_up_close">&#10006</div>
+        </div>
+    </div>
+</div>
+
 <div class="content">
     {% block content %}
     {% endblock content %}
@@ -73,5 +84,6 @@
         </div>
     </div>
 </footer>
+<script src="{% static 'js/pop-up.js' %}" type="text/javascript"></script>
 </body>
 </html>
