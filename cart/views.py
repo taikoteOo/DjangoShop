@@ -42,9 +42,9 @@ class Cart:
             }
         # если нужно перезаписать кол-во товаров
         if override_quantity:
-            self.cart[product_id][quantity] = quantity
+            self.cart[product_id]['quantity'] = quantity
         else:
-            self.cart[product_id][quantity] += quantity
+            self.cart[product_id]['quantity'] += quantity
 
         self.save()
 
@@ -108,14 +108,14 @@ class ProductCartUser:
         # если товара нет в корзине
         if product_id not in self.cart:
             self.cart[product_id] = {
-                'quantity': 0,
+                'quantity': 1,
                 'price': str(product.price)
             }
         # если нужно перезаписать кол-во товаров
         if override_quantity:
-            self.cart[product_id][quantity] = quantity
+            self.cart[product_id]['quantity'] = quantity
         else:
-            self.cart[product_id][quantity] += quantity
+            self.cart[product_id]['quantity'] += quantity
 
         self.save()
 
@@ -169,11 +169,16 @@ def cart_add(request, slug):
         cart = Cart(request)
 
     cart.add(product=product)
-    return redirect('index')
+    return redirect('shop:index')
 
 # рендер корзины
 def cart_detail(request):
-    return render(request, template_name='cart/cart_detail.html')
+    if request.user.is_authenticated:
+        cart = ProductCartUser(request)
+    else:
+        cart = Cart(request)
+
+    return render(request, 'cart/cart_detail.html', {'cart': cart})
 
 # удаление товара из корзины
 def remove_product(request, product_id):
@@ -186,13 +191,13 @@ def remove_product(request, product_id):
         cart = Cart(request)
         cart.remove(product)
 
-    return redirect('cart_detail')
+    return redirect('cart:cart_detail')
 
 # очистка корзины
 def remove_cart(request):
     cart = Cart(request)
     cart.clear()
-    return redirect('cart_detail')
+    return redirect('cart:cart_detail')
 
 def update_cart_by_front(request):
     pass

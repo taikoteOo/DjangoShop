@@ -244,3 +244,18 @@ footer {
   background-color: #6c757d;
   color: white;
 }
+
+.btn-add-to-cart {
+  background-color: #ffc107;
+  color: #000;
+  border: none;
+  padding: 12px 20px;
+  font-size: 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.btn-add-to-cart:hover {
+  background-color: #e0a800;
+}

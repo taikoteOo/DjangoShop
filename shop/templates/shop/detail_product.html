@@ -2,36 +2,39 @@
 {% load static %}
 
 {% block title %}
-<title>{{ product.name }}</title>
+    <title>{{ product.name }}</title>
 {% endblock %}
 
 {% block content %}
-  <div class="product-card">
-    <div class="product-image">
-      {% if product.image %}
-        <img src="{{ product.image.url }}" alt="{{ product.name }}">
-      {% else %}
-        <img src="{% static 'img/no_image.jpg' %}" alt="Нет изображения">
-      {% endif %}
-    </div>
+    <div class="product-card">
+        <div class="product-image">
+            {% if product.image %}
+            <img src="{{ product.image.url }}" alt="{{ product.name }}">
+            {% else %}
+            <img src="{% static 'img/no_image.jpg' %}" alt="Нет изображения">
+            {% endif %}
+        </div>
+        <div class="product-info">
+            <h2 class="product-name">{{ product.name }}</h2>
+            <p class="product-category">Категория: {{ product.category }}</p>
+            <p class="product-description">{{ product.description }}</p>
+            <p class="product-price">Цена: <strong>{{ product.price }} ₽</strong></p>
+            <form action="{% url 'cart:cart_add' product.slug %}" method="post">
+                {% csrf_token %}
+                <button type="submit" class="btn-add-to-cart">Добавить в корзину</button>
+            </form>
 
-    <div class="product-info">
-      <h2 class="product-name">{{ product.name }}</h2>
-      <p class="product-category">Категория: {{ product.category }}</p>
-      <p class="product-description">{{ product.description }}</p>
-      <p class="product-price">Цена: <strong>{{ product.price }} ₽</strong></p>
-
-      <div class="product-meta">
-        <p>ID товара: {{ product.pk }}</p>
-        <p>Дата создания: {{ product.created_ad|date:"d.m.Y" }}</p>
-        <p>
-          {% if product.available %}
-            <span class="status available">Доступен к продаже</span>
-          {% else %}
-            <span class="status unavailable">Не доступен</span>
-          {% endif %}
-        </p>
-      </div>
+            <div class="product-meta">
+            <p>ID товара: {{ product.pk }}</p>
+            <p>Дата создания: {{ product.created_ad|date:"d.m.Y" }}</p>
+            <p>
+                {% if product.available %}
+                    <span class="status available">Доступен к продаже</span>
+                {% else %}
+                    <span class="status unavailable">Не доступен</span>
+                {% endif %}
+            </p>
+            </div>
+        </div>
     </div>
-  </div>
 {% endblock %}

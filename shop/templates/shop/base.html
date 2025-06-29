@@ -20,7 +20,7 @@
         <div class="menu-item"><a href="{% url 'users:login' %}">Вход</a></div>
         <div class="menu-item"><div class="button"><a href="#" id="open_pop_up">Регистрация</a></div></div>
         {% else %}
-        <div class="menu-item"><a href="">Корзина</a></div>
+        <div class="menu-item"><a href="{% url 'cart:cart_detail' %}">Корзина</a></div>
         <div class="menu-item"><a href="">Личный кабинет</a></div>
         <div class="menu-item"><a href="{% url 'users:logout' %}">Выйти</a></div>
         {% endif %}
@@ -67,11 +67,11 @@
         <div class="business-hours">
             <div class="info-item"><h4>Часы работы</h4></div>
             <div class="info-item">
-                <span>Воскресенье - Четверг</span>
+                <span>Воскресенье - Четверг:  </span>
                 <span>14:00 - 01:00</span>
             </div>
             <div class="info-item">
-                <span>Пятница - Суббота</span>
+                <span>Пятница - Суббота:  </span>
                 <span>14:00 - 03:00</span>
             </div>
             <div class="info-item">Но мы всегда готовы задержаться ради дорогих гостей!</div>
