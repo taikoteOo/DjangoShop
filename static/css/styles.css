@@ -235,8 +235,8 @@ footer {
 }
 
 .available {
-  background-color: #28a745;
-  color: white;
+  background-color: #ffc107;
+  color: #0a0a0a;
 }
 
 .unavailable {
