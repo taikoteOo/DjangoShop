@@ -173,13 +173,12 @@ footer {
   display: flex;
   flex-direction: row;
   max-width: 900px;
-  margin: 40px auto;
+  margin: 0px auto;
   background-color: #1f1f1f;
   border-radius: 12px;
   overflow: hidden;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
   color: #f3f4f6;
-  font-family: sans-serif;
 }
 
 .product-image {
@@ -245,17 +244,7 @@ footer {
   color: white;
 }
 
-.btn-add-to-cart {
-  background-color: #ffc107;
-  color: #000;
-  border: none;
-  padding: 12px 20px;
-  font-size: 1rem;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.btn-add-to-cart:hover {
-  background-color: #e0a800;
+#like.liked {
+    transform: scale(1.2);
+    transition: all 0.2s ease;
 }
