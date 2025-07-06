@@ -108,7 +108,7 @@ class ProductCartUser:
         # если товара нет в корзине
         if product_id not in self.cart:
             self.cart[product_id] = {
-                'quantity': 1,
+                'quantity': 0,
                 'price': str(product.price)
             }
         # если нужно перезаписать кол-во товаров

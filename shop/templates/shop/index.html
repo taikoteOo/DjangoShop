@@ -4,34 +4,5 @@
 <title>Бар Эклектика</title>
 {% endblock title %}
 {% block content %}
-<div class="main">
-    <div class="categories">
-        <ul>
-            {% for category in categories %}
-            <li>
-                <a href="{% url 'shop:index_category' category.slug %}">{{ category.name }}</a>
-            </li>
-            {% endfor %}
-        </ul>
-    </div>
-    <div class="products">
-        {% for product in products %}
-        <div class="product-item">
-            <div class="product-item__name"><a href="{% url 'shop:product_detail' slug=product.slug%}">{{product.name}}</a></div>
-            <div class="product-item__price">{{product.price}}</div>
-            <div class="product-item__image">
-                {% if product.image %}
-                <div>
-                    <img width="200" height="auto" src="{{product.image.url}}">
-                </div>
-                {% else %}
-                <div>
-                    <img width="150" height="auto" src="{% static 'img/no_image.jpg' %}">
-                </div>
-                {% endif %}
-            </div>
-        </div>
-        {% endfor %}
-    </div>
-</div>
+
 {% endblock content %}

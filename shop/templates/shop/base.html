@@ -14,7 +14,7 @@
     <div class="nav-menu">
         <div class="logo-and-name"><h1><a href="{% url 'shop:index' %}">Бар Эклектика</a></h1></div>
         <div class="menu-item"><a href="{% url 'shop:index' %}">Главная</a></div>
-        <div class="menu-item"><a href="">Меню</a></div>
+        <div class="menu-item"><a href="{% url 'shop:beers' %}">Пиво</a></div>
         <div class="menu-item"><a href="">События</a></div>
         {% if not user.is_authenticated%}
         <div class="menu-item"><a href="{% url 'users:login' %}">Вход</a></div>
