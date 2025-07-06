@@ -3,16 +3,15 @@
 {% block content %}
 
 <div>
-  {% for category in categories %}
+  {% for brewery in breweries %}
   <div>
-    <b>{{ category.pk }}. {{ category.name }}</b>
+    <b>{{ brewery.pk }}. {{ brewery.name }}</b>
     <br>
-    <i>{{ category.description }}</i>
+    <i>{{ brewery.description }}</i>
     <br>
-    <a href="{% url 'staff:category_delete' category.slug %}">
+    <a href="{% url 'staff:brewery_delete' brewery.slug %}">
       <img class="icon" src="{% static 'img/icon/remove.png' %}">
     </a>
-    <br>
   </div>
   {% endfor %}
 </div>

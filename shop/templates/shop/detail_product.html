@@ -16,7 +16,11 @@
         </div>
         <div class="product-info">
             <h2 class="product-name">{{ product.name }}</h2>
-            <p class="product-category">Категория: {{ product.category }}</p>
+            <p class="product-category">{{ product.category }}</p>
+            <div class="depth">
+                <p class="product-abv">{{ product.abv }} %</p>
+                <p class="product-ibu">{{ product.ibu }} IBU</p>
+            </div>
             <p class="product-description">{{ product.description }}</p>
             <p class="product-price">Цена: <strong>{{ product.price }} ₽</strong></p>
             <a href="{% url 'cart:cart_add' product.slug %}">

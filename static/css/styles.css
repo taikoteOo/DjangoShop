@@ -9,6 +9,10 @@
     background-color:  #1d1d1d;
 }
 
+#id_description {
+    color: #0a0a0a;
+}
+
 form input, form button {
   color: #0a0a0a;
 }
@@ -246,4 +250,13 @@ footer {
 #like.liked {
     transform: scale(1.2);
     transition: all 0.2s ease;
+}
+
+.depth {
+    display: flex;
+}
+
+.product-abv {
+    padding-right: 10px;
+    padding-bottom: 10px;
 }

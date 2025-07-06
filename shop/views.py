@@ -1,12 +1,12 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse_lazy
 from  django.views.generic import (CreateView,
                                    DetailView,
                                    ListView,
                                    UpdateView,
                                    DeleteView)
-from .forms import CategoryCreateForm, ProductCreateForm
-from .models import Category, Product
+from .forms import CategoryCreateForm, ProductCreateForm, BreweryCreateForm
+from .models import Category, Product, Brewery
 
 
 ################   АДМИНКА   ################
@@ -16,13 +16,48 @@ class CategoryCreateView(CreateView):
     model = Category
     form_class = CategoryCreateForm
     template_name = 'admin_pages/add_category.html'
-    success_url = reverse_lazy('staff:categories')
+    success_url = reverse_lazy('staff:category_add')
 
 # Класс для просмотра категорий
 class CategoryListView(ListView):
     model = Category
     template_name = 'admin_pages/list_category.html'
     context_object_name = 'categories'
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        # Сортировка по возрастанию
+        queryset = queryset.order_by('pk')
+        return queryset
+
+def delete_category(request, slug):
+    category = get_object_or_404(Category, slug=slug)
+    category .delete()
+    return redirect('staff:categories')
+
+# Класс для создания пивоварни
+class BreweryCreateView(CreateView):
+    model = Brewery
+    form_class = BreweryCreateForm
+    template_name = 'admin_pages/add_brewery.html'
+    success_url = reverse_lazy('staff:brewery_add')
+
+# Класс для просмотра пивоварен
+class BreweryListView(ListView):
+    model = Brewery
+    template_name = 'admin_pages/list_brewery.html'
+    context_object_name = 'breweries'
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        # Сортировка по возрастанию
+        queryset = queryset.order_by('pk')
+        return queryset
+
+def delete_brewery(request, slug):
+    brewery = get_object_or_404(Brewery, slug=slug)
+    brewery .delete()
+    return redirect('staff:breweries')
 
 # Класс для создания товара
 class ProductCreateView(CreateView):
@@ -43,6 +78,17 @@ class ProdictDetailView(DetailView):
     template_name = 'admin_pages/detail_product.html'
     context_object_name = 'product'
     slug_url_kwarg = 'slug'
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        # Сортировка по возрастанию
+        queryset = queryset.order_by('pk')
+        return queryset
+
+def delete_product(request, slug):
+    product = get_object_or_404(Product, slug=slug)
+    product .delete()
+    return redirect('staff:products')
 
 ################   Клиентская часть   ################
 
