@@ -213,13 +213,12 @@ footer {
 .product-description {
   font-size: 1rem;
   line-height: 1.6;
-  margin-bottom: 20px;
+  margin-bottom: 5px;
   color: #ced4da;
 }
 
 .product-price {
-  font-size: 1.25rem;
-  margin-bottom: 20px;
+  margin-bottom: 5px;
   color: #ffffff;
 }
 

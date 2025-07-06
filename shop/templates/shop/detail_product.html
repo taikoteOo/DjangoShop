@@ -20,15 +20,15 @@
             <p class="product-description">{{ product.description }}</p>
             <p class="product-price">Цена: <strong>{{ product.price }} ₽</strong></p>
             <a href="{% url 'cart:cart_add' product.slug %}">
-                    <img class="icon" src="{% static 'img/cart.png' %}">
+                    <img class="icon" src="{% static 'img/icon/cart.png' %}">
             </a>
             <a href="#">
-                    <img class="icon" id="like" src="{% static 'img/like_off.png' %}"
-                         data-off="{% static 'img/like_off.png' %}" data-on="{% static 'img/like_on.png' %}">
+                    <img class="icon" id="like" src="{% static 'img/icon/like_off.png' %}"
+                         data-off="{% static 'img/icon/like_off.png' %}" data-on="{% static 'img/icon/like_on.png' %}">
             </a>
             <div class="product-meta">
             <p>ID товара: {{ product.pk }}</p>
-            <p>Дата создания: {{ product.created_ad|date:"d.m.Y" }}</p>
+            <p style="padding-bottom: 10px;">Дата создания: {{ product.created_ad|date:"d.m.Y" }}</p>
             <p>
                 {% if product.available %}
                     <span class="status available">Доступен к продаже</span>
