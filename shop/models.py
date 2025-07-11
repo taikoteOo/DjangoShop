@@ -1,5 +1,6 @@
 from django.db import models
 from django.urls import reverse
+from django.contrib.auth import get_user_model
 from slugify import slugify
 
 
@@ -76,3 +77,18 @@ class Product(models.Model):
 
     def get_absolute_url(self):
         return reverse('staff:product_detail', kwargs={'slug': self.slug})
+
+User = get_user_model()
+
+# Избранное
+class LikeUser(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+
+# Элемент избранного
+class LikeItem(models.Model):
+    like = models.ForeignKey(LikeUser, on_delete=models.CASCADE)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    created = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ['-created']

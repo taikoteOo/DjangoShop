@@ -1,7 +1,7 @@
 from datetime import date
 
 from django import forms
-from django.contrib.auth.forms import SetPasswordForm
+from django.contrib.auth.forms import SetPasswordForm, AuthenticationForm
 from django.core.exceptions import ValidationError
 
 from .models import CustomUser
@@ -11,7 +11,7 @@ class RegistrationForm(forms.ModelForm):
 
     class Meta:
         model = CustomUser
-        fields = ('username', 'email', 'phone', 'birthday', 'city', 'image','password')
+        fields = ('username', 'birthday', 'email', 'password')
         help_texts = {
             'username': ''
         }
@@ -21,7 +21,7 @@ class RegistrationForm(forms.ModelForm):
         }
         widgets = {
             'birthday': forms.DateInput(attrs={'type':'date'}),
-            'password': forms.PasswordInput
+            'password': forms.PasswordInput()
         }
 
     def clean_password2(self):
@@ -61,7 +61,7 @@ class CustomPasswordChangeForm(SetPasswordForm):
         widget=forms.PasswordInput()
     )
     new_password2 = forms.CharField(
-        label='Подтвержение нового пароля',
+        label='Подтверждение нового пароля',
         strip=False,
         widget=forms.PasswordInput()
     )
@@ -80,3 +80,16 @@ class CustomPasswordChangeForm(SetPasswordForm):
                 raise ValidationError('Введённые пароли не совпадают')
 
         return cleaned_data
+
+class LoginForm(AuthenticationForm):
+
+    class Meta:
+        model = CustomUser
+        fields = ('username', 'password')
+        help_texts = {
+            'username': '',
+            'password': ''
+        }
+        widgets = {
+            'password': forms.PasswordInput()
+        }

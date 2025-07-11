@@ -169,7 +169,7 @@ def cart_add(request, slug):
         cart = Cart(request)
 
     cart.add(product=product)
-    return redirect('shop:index')
+    return redirect('shop:product_detail', slug=slug)
 
 # рендер корзины
 def cart_detail(request):

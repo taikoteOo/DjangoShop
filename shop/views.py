@@ -6,7 +6,7 @@ from  django.views.generic import (CreateView,
                                    UpdateView,
                                    DeleteView)
 from .forms import CategoryCreateForm, ProductCreateForm, BreweryCreateForm
-from .models import Category, Product, Brewery
+from .models import Category, Product, Brewery, LikeUser, LikeItem
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 
@@ -133,5 +133,84 @@ class ProductDetailClientView(DetailView):
     context_object_name = 'product'
     slug_url_kwarg = 'slug'
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        product = self.object  # получаем текущий товар
+
+        if self.request.user.is_authenticated:
+            like = ProductLikeUser(self.request)
+            context['liked'] = product.id in like.like_ids
+        else:
+            context['liked'] = False
+
+        return context
+
 def index(request):
     return render(request, template_name='shop/index.html')
+
+
+# Класс избранного
+class ProductLikeUser:
+    def __init__(self, request):
+        self.user = request.user
+        if not self.user.is_authenticated:
+            raise Exception("Избранное доступно только авторизованным пользователям")
+
+        self.like_user, created = LikeUser.objects.get_or_create(user=self.user)
+        self.like_ids = list(
+            LikeItem.objects.filter(like=self.like_user).values_list('product_id', flat=True)
+        )
+
+    def add(self, product):
+        product_id = product.id
+        if product_id in self.like_ids:
+            LikeItem.objects.filter(like=self.like_user, product_id=product_id).delete()
+            self.like_ids.remove(product_id)
+        else:
+            LikeItem.objects.create(like=self.like_user, product=product)
+            self.like_ids.append(product_id)
+
+    def remove(self, product_id):
+        if product_id in self.like_ids:
+            LikeItem.objects.filter(like=self.like_user, product_id=product_id).delete()
+            self.like_ids.remove(product_id)
+
+    def get_products(self):
+        return Product.objects.filter(id__in=self.like_ids)
+
+    def clear(self):
+        LikeItem.objects.filter(like=self.like_user).delete()
+        self.like_ids.clear()
+
+    def __len__(self):
+        return len(self.like_ids)
+
+    def __iter__(self):
+        products = Product.objects.filter(id__in=self.like_ids)
+        for product in products:
+            yield product
+
+# добавление товара в избранное
+def like_add(request, slug):
+    product = get_object_or_404(Product, slug=slug)
+    # создаем избранное (получаем из сессии или БД)
+    like = ProductLikeUser(request)
+    like.add(product)
+    return redirect('shop:product_detail', slug=slug)
+
+# рендер избранного
+def like_detail(request):
+    like = ProductLikeUser(request)
+    products = like.get_products()
+
+    paginator = Paginator(products, 12)  # 12 товаров на страницу
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+
+    return render(request, 'shop/like_detail.html', {'products': page_obj})
+
+# удаление товара из избранного
+def remove_product_like(request, product_id):
+    like = ProductLikeUser(request)
+    like.remove(product_id)
+    return redirect('shop:like_detail')

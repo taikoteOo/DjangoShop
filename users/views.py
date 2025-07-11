@@ -4,9 +4,10 @@ from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import authenticate, login, logout, update_session_auth_hash
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-from shopproject.settings import LOGIN_REDIRECT_URL
-from users.forms import RegistrationForm, CustomPasswordChangeForm
 from django.core.exceptions import PermissionDenied
+
+from shopproject.settings import LOGIN_REDIRECT_URL
+from users.forms import RegistrationForm, CustomPasswordChangeForm, LoginForm
 
 
 def register(request):
@@ -36,7 +37,7 @@ def register(request):
 
 def log_in(request):
     # создание формы
-    form = AuthenticationForm(request, request.POST)
+    form = LoginForm(request, request.POST)
     # проверка формы
     if form.is_valid():
         # получение логина и пароля формы

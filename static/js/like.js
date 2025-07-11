@@ -1,7 +1,6 @@
 const like = document.getElementById('like');
 
 like.addEventListener('click', function (e) {
-    e.preventDefault();
 
     const isLiked = like.classList.contains('liked');
 
