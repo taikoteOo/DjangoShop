@@ -1,0 +1,22 @@
+{% load static %}
+<html>
+<head>
+    <title>Страница не найдена</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="{% static 'css/error.css' %}">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>404</h1>
+            <h2>Страница не найдена</h2>
+        </header>
+        <main class="image-container">
+            <img src="{% static 'img/error_404.jpg' %}" alt="404">
+        </main>
+        <footer class="footer">
+            <a href="{% url 'shop:index' %}">Перейти к главной странице</a>
+        </footer>
+    </div>
+</body>
+</html>

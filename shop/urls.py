@@ -1,5 +1,7 @@
 from django.urls import path
-from .views import ProductsByCategoryListView, ProductDetailClientView, index, like_detail, like_add, remove_product_like
+from .views import (ProductsByCategoryListView, ProductDetailClientView, index,
+                    like_detail, like_add, remove_product_like,
+                    not_found, for_bidden, error_server)
 
 
 app_name = 'shop'
@@ -11,4 +13,8 @@ urlpatterns = [
     path('like/add/<slug:slug>/', like_add, name='like_add'),
     path('like/remove/<int:product_id>/', remove_product_like, name='like_remove'),
     path('', index, name='index'),
+
+    path('404', not_found, name='404'),
+    path('403', for_bidden, name='403'),
+    path('500', error_server, name='500'),
 ]

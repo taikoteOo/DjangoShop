@@ -214,3 +214,21 @@ def remove_product_like(request, product_id):
     like = ProductLikeUser(request)
     like.remove(product_id)
     return redirect('shop:like_detail')
+
+# def page_not_found(request, exception):
+#     return render(request, template_name='shop/404.html', context={'title':'404'})
+#
+# def forbidden(request, exception):
+#     return render(request, template_name='shop/403.html', context={'title':'403'})
+#
+# def server_error(request):
+#     return render(request, template_name='shop/500.html', context={'title':'500'})
+
+def not_found(request):
+    return render(request, template_name='shop/404.html', context={'title': '404'})
+
+def for_bidden(request):
+    return render(request, template_name='shop/403.html', context={'title':'403'})
+
+def error_server(request):
+    return render(request, template_name='shop/500.html', context={'title':'500'})
