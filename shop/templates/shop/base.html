@@ -21,7 +21,7 @@
         <div class="menu-item"><div class="button"><a href="#" id="open_pop_up">Регистрация</a></div></div>
         {% else %}
         <div class="menu-item"><a href="{% url 'cart:cart_detail' %}">Корзина</a></div>
-        <div class="menu-item"><a href="">Личный кабинет</a></div>
+        <div class="menu-item"><a href="{% url 'users:profile' pk=user.pk %}">Личный кабинет</a></div>
         <div class="menu-item"><a href="{% url 'users:logout' %}">Выйти</a></div>
         {% endif %}
     </div>
