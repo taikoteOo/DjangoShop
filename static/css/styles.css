@@ -7,6 +7,7 @@
 
 .content {
     background-color:  #1d1d1d;
+    min-height: 61.3vh;
 }
 
 form input, form button, #prod_quantity, #id_description {
@@ -25,6 +26,7 @@ form label {
 
 .forms {
     text-align: center;
+    width: 60%;
 }
 
 a {
@@ -55,6 +57,12 @@ header {
     padding: 10px 15px;
     transition: background-color 0.3s;
     margin-right: 15px;
+    height: 100%;
+}
+
+.menu-item a.active {
+    color: #ffc107;
+    text-shadow: 0 0 3px #ffc107;
 }
 
 h1, h3 {
@@ -299,7 +307,7 @@ footer {
 
 .products-section {
     flex: 1;
-    padding-left: 30px;
+    padding-left: 10%;
 }
 
 .products-section h2 {
@@ -351,4 +359,19 @@ footer {
 .pagination .current-page {
     margin: 0 10px;
     color: #ccc;
+}
+
+.profile {
+    width: 20%;
+    padding-left: 10%;
+}
+
+.photo {
+    border-radius: 100px;
+    border: 5px solid #0a0a0a;
+    width: 100%;
+}
+
+.profile_content {
+    display: flex;
 }

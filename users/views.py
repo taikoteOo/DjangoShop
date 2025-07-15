@@ -7,7 +7,7 @@ from django.core.exceptions import PermissionDenied
 
 from shopproject.settings import LOGIN_REDIRECT_URL
 from .models import CustomUser
-from users.forms import RegistrationForm, CustomPasswordChangeForm, LoginForm
+from users.forms import RegistrationForm, CustomPasswordChangeForm, LoginForm, ProfileForm
 
 
 def register(request):
@@ -83,5 +83,20 @@ def change_password(request):
 
     return render(request, 'users/change_password.html', {'form': form})
 
-def change_profile(request):
-    pass
+def change_profile(request, pk):
+    user = get_object_or_404(CustomUser, pk=pk)
+    if request.method == 'POST':
+        form = ProfileForm(request.POST, request.FILES, instance=user)
+        if form.is_valid():
+            form.save(request.user)
+            messages.success(request, 'Данные успешно изменены')
+    else:
+        form = ProfileForm(initial={
+            'username': user.username,
+            'email': user.email,
+            'image': user.image,
+            'first_name': user.first_name,
+            'last_name': user.last_name,
+            'phone': user.phone
+        })
+    return render(request, template_name='users/change_profile.html', context={'form': form})

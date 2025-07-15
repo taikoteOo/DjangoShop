@@ -12,17 +12,17 @@
 <body>
 <header>
     <div class="nav-menu">
-        <div class="logo-and-name"><h1><a href="{% url 'shop:index' %}">Бар Эклектика</a></h1></div>
-        <div class="menu-item"><a href="{% url 'shop:index' %}">Главная</a></div>
-        <div class="menu-item"><a href="{% url 'shop:beers' %}">Пиво</a></div>
-        <div class="menu-item"><a href="">События</a></div>
-        {% if not user.is_authenticated%}
-        <div class="menu-item"><a href="{% url 'users:login' %}">Вход</a></div>
-        <div class="menu-item"><div class="button"><a href="#" id="open_pop_up">Регистрация</a></div></div>
+        <div class="logo-and-name"><h1><a href="{% url 'shop:index' %}" class="{% if request.path == '/' %}active{% endif %}">Бар Эклектика</a></h1></div>
+        <div class="menu-item"><a href="{% url 'shop:index' %}" class="{% if request.path == '/' %}active{% endif %}">Главная</a></div>
+        <div class="menu-item"><a href="{% url 'shop:beers' %}" class="{% if request.path == '/products/' %}active{% endif %}">Пиво</a></div>
+        <div class="menu-item"><a href="" class="{% if request.path == '/events/' %}active{% endif %}">События</a></div>
+        {% if not user.is_authenticated %}
+            <div class="menu-item"><a href="{% url 'users:login' %}" class="{% if request.path == '/login/' %}active{% endif %}">Вход</a></div>
+            <div class="menu-item"><div class="button"><a href="#" id="open_pop_up" class="{% if request.path == '/register/' or request.path == '#' %}active{% endif %}">Регистрация</a></div></div>
         {% else %}
-        <div class="menu-item"><a href="{% url 'cart:cart_detail' %}">Корзина</a></div>
-        <div class="menu-item"><a href="{% url 'users:profile' pk=user.pk %}">Личный кабинет</a></div>
-        <div class="menu-item"><a href="{% url 'users:logout' %}">Выйти</a></div>
+            <div class="menu-item"><a href="{% url 'cart:cart_detail' %}" class="{% if request.path == '/cart/detail/' %}active{% endif %}">Корзина</a></div>
+            <div class="menu-item"><a href="{% url 'users:profile' pk=user.pk %}" class="{% if '/profile/' in request.path %}active{% endif %}">Личный кабинет</a></div>
+            <div class="menu-item"><a href="{% url 'users:logout' %}" class="{% if request.path == '/logout/' %}active{% endif %}">Выйти</a></div>
         {% endif %}
     </div>
 </header>
@@ -37,6 +37,13 @@
 </div>
 
 <div class="content">
+        {% if messages %}
+    <div class="messages">
+        {% for message in messages %}
+        <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+        {% endfor %}
+    </div>
+    {% endif %}
     {% block content %}
     {% endblock content %}
 </div>

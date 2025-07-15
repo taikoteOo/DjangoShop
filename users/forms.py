@@ -95,3 +95,10 @@ class ProfileForm(UserChangeForm):
             'last_name': 'Фамилия',
             'phone': 'Номер телефона',
         }
+        help_texts = {
+            'username':''
+        }
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields.pop('password')

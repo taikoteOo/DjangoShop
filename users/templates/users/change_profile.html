@@ -1,12 +1,19 @@
 {% extends 'shop/base.html' %}
 
 {% block content %}
-
-<h3>Редактирование профиля</h3>
-<form method="post">
-    {%csrf_token%}
-    {{form.as_p}}
-    <button type="submit">Сохранить</button>
-</form>
+<diV class="profile_content">
+    {% include 'users/profile_base.html' %}
+    <div class="forms">
+        <h3>Редактирование профиля</h3>
+        <form method="post" enctype="multipart/form-data">
+            {%csrf_token%}
+            {{form.as_p}}
+            <button type="submit">Сохранить</button>
+            <a href="{%url 'users:profile' pk=user.pk %}">
+                <button type="button">Вернуться в профиль профиль</button>
+            </a>
+        </form>
+    </div>
+</diV>
 
 {% endblock content %}
