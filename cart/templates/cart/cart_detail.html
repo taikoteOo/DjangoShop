@@ -2,7 +2,8 @@
 {% load static %}
 
 {% block content %}
-<table class="cart-table" style="width:80%; text-align:justify; margin:0 auto;">
+{% if cart|length != 0 %}
+<table class="cart-table">
     <thead>
     <tr>
         <th>№</th>
@@ -64,4 +65,7 @@
         {% endif %}
     </div>
 </div>
+{% else %}
+<h3 class="empty">Корзина пуста</h3>
+{% endif %}
 {% endblock content %}

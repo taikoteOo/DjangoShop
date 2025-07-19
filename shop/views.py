@@ -101,7 +101,7 @@ class ProductsByCategoryListView(ListView):
         context = super().get_context_data(**kwargs)
         categories = Category.objects.all()
         context['categories'] = categories
-
+        context['is_products_page'] = True
         # Добавляем текущую категорию, если есть
         slug = self.kwargs.get('slug')
         if slug:
@@ -136,7 +136,7 @@ class ProductDetailClientView(DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         product = self.object  # получаем текущий товар
-
+        context['is_products_page'] = True
         if self.request.user.is_authenticated:
             like = ProductLikeUser(self.request)
             context['liked'] = product.id in like.like_ids
@@ -207,7 +207,7 @@ def like_detail(request):
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
 
-    return render(request, 'shop/like_detail.html', {'products': page_obj})
+    return render(request, 'shop/like_detail.html', {'products': page_obj, 'is_profile_page': True})
 
 # удаление товара из избранного
 def remove_product_like(request, product_id):

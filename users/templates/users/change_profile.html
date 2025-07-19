@@ -9,8 +9,8 @@
             {%csrf_token%}
             {{form.as_p}}
             <button type="submit">Сохранить</button>
-            <a href="{%url 'users:profile' pk=user.pk %}">
-                <button type="button">Вернуться в профиль профиль</button>
+            <a href="{%url 'users:change-password' %}">
+            <button type="button" style="color: #0a0a0a;">Сменить пароль</button>
             </a>
         </form>
     </div>

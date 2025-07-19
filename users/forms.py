@@ -96,7 +96,8 @@ class ProfileForm(UserChangeForm):
             'phone': 'Номер телефона',
         }
         help_texts = {
-            'username':''
+            'username':'',
+            'image': ''
         }
 
     def __init__(self, *args, **kwargs):

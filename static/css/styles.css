@@ -3,11 +3,13 @@
     padding: 0;
     box-sizing: border-box;
     color: #f3f4f6;
+    font-family: 'Caveat', cursive;
 }
 
 .content {
     background-color:  #1d1d1d;
     min-height: 61.3vh;
+    font-size: 120%;
 }
 
 form input, form button, #prod_quantity, #id_description {
@@ -26,7 +28,7 @@ form label {
 
 .forms {
     text-align: center;
-    width: 60%;
+    width: 100%;
 }
 
 a {
@@ -37,6 +39,7 @@ a {
 header {
     padding: 10px 20px;
     background-color: #0a0a0a;
+    font-size: 140%;
 }
 
 .nav-menu {
@@ -84,17 +87,24 @@ h1, h3 {
 
 footer {
     display: flex;
+    flex-wrap: wrap;
     justify-content: center;
     align-items: center;
     padding: 20px 0;
     background-color: #0a0a0a;
+    font-size: 120%;
+}
+
+.hours {
+    padding-right: 6px;
 }
 
 .container {
     display: grid;
     grid-template-columns: repeat(3, 1fr); /* Разделяем на 3 колонки */
     gap: 10%; /* Отступ между элементами */
-
+    width: 100%;
+    padding: 0 10%;
 }
 
 .info {
@@ -265,8 +275,6 @@ footer {
     padding-bottom: 10px;
 }
 
-/* shop/styles.css */
-
 .main-container {
     display: flex;
     padding: 20px;
@@ -307,12 +315,12 @@ footer {
 
 .products-section {
     flex: 1;
-    padding-left: 10%;
 }
 
 .products-section h2 {
     margin-bottom: 20px;
     color: #ffc107;
+    font-size: 110%;
 }
 
 .product-grid {
@@ -362,8 +370,7 @@ footer {
 }
 
 .profile {
-    width: 20%;
-    padding-left: 10%;
+    width: 10%;
 }
 
 .photo {
@@ -374,4 +381,29 @@ footer {
 
 .profile_content {
     display: flex;
+    padding: 15px 10%;
+}
+
+.profile_username {
+    color: #ffc107;
+}
+
+.profile_nav_item:hover {
+  color: #ffc107;
+}
+
+.profile_nav_item a.active {
+    color: #ffc107;
+    text-shadow: 0 0 3px #ffc107;
+}
+
+.empty {
+    text-align: center;
+}
+
+.cart-table {
+    width:80%;
+    text-align:justify;
+    margin:0 auto;
+    padding: 15px 0;
 }

@@ -22,7 +22,7 @@
     </div>
 
     <div class="products-section">
-        <h2>{{ current_category.name|default:"Все товары" }}</h2>
+        <h3>{{ current_category.name|default:"Все товары" }}</h3>
 
         {% if products_page.object_list %}
             <div class="product-grid">

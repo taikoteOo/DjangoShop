@@ -67,7 +67,7 @@ def user_profile(request, pk):
     user = get_object_or_404(CustomUser, pk=pk)
     if request.user != user:
         raise PermissionDenied()
-    context = {'user': user, 'title': 'Информация о пользователе'}
+    context = {'user': user, 'title': 'Информация о пользователе', 'is_profile_page': True}
     return render(request, template_name='users/profile.html', context=context)
 
 @login_required
@@ -80,8 +80,8 @@ def change_password(request):
             messages.success(request, 'Ваш пароль успешно изменён')
     else:
         form = CustomPasswordChangeForm(request.user)
-
-    return render(request, 'users/change_password.html', {'form': form})
+    context = {'form': form, 'is_profile_page': True, 'is_profile_change': True}
+    return render(request, 'users/change_password.html', context)
 
 def change_profile(request, pk):
     user = get_object_or_404(CustomUser, pk=pk)
@@ -99,4 +99,5 @@ def change_profile(request, pk):
             'last_name': user.last_name,
             'phone': user.phone
         })
-    return render(request, template_name='users/change_profile.html', context={'form': form})
+    context = {'form': form, 'is_profile_page': True, 'is_profile_change': True}
+    return render(request, template_name='users/change_profile.html', context=context)
