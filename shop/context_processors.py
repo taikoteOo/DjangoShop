@@ -1,4 +1,5 @@
 from users.forms import RegistrationForm
+from django.shortcuts import render
 
 
 def register(request):
