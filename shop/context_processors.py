@@ -1,5 +1,5 @@
 from users.forms import RegistrationForm
-from django.shortcuts import render
+from django.http.response import JsonResponse, HttpResponse
 
 
 def register(request):
@@ -25,4 +25,4 @@ def register(request):
     # Если метод GET (страница с пустой формой регистрации)
     form = RegistrationForm()
     context = {'title':'Регистрация пользователя', 'register_form': form}
-    return render(request, template_name='users/registration.html', context=context)
+    return JsonResponse(response_data)
