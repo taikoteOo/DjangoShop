@@ -16,7 +16,8 @@ class RegistrationForm(forms.ModelForm):
             'username': ''
         }
         labels = {
-            'birthday': 'Дата рождения'
+            'birthday': 'Дата рождения',
+            'email': 'Электронная почта'
         }
         widgets = {
             'birthday': forms.DateInput(attrs={'type':'date'}),

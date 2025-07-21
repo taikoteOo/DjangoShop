@@ -12,7 +12,7 @@
     font-size: 120%;
 }
 
-form input, form button, #prod_quantity, #id_description {
+#prod_quantity, #id_description {
   color: #0a0a0a;
 }
 
@@ -22,8 +22,26 @@ form input, form button, #prod_quantity, #id_description {
 
 form label {
     display: inline-block;
-    width: 10%;
     text-align: initial;
+    padding: 5px;
+}
+
+form input, form button {
+    color: #0a0a0a;
+    padding: 5px;
+    margin-top: 10px;
+    border-radius: 10px;
+}
+
+form h3 {
+    padding-bottom: 10px;
+}
+
+form p {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    align-items: center;
+    gap: 10px;
 }
 
 .forms {
@@ -166,11 +184,10 @@ footer {
 
 .pop_up_body {
     margin: auto;
-    width: 500px;
-    background-color: #FFF;
+    background-color: #1d1d1d;
     border-radius: 10px;
     text-align: center;
-    padding: 100px 15px 110px 15px;
+    padding: 30px;
     position: relative;
 }
 

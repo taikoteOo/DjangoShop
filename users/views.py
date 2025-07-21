@@ -4,36 +4,56 @@ from django.contrib.auth import authenticate, login, logout, update_session_auth
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.core.exceptions import PermissionDenied
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
 
+import json
 from shopproject.settings import LOGIN_REDIRECT_URL
 from .models import CustomUser
 from users.forms import RegistrationForm, CustomPasswordChangeForm, LoginForm, ProfileForm
 
 
+@csrf_exempt
 def register(request):
-    # Когда отправляем форму на сервер
     if request.method == 'POST':
-        print("POST data:", request.POST)  # данные формы
-        print("FILES data:", request.FILES)
-        # создаём объект формы с данными из запроса
-        form = RegistrationForm(request.POST, request.FILES)
-        print("Form is valid?", form.is_valid())  # <-- Отладка
-        print(form.errors)
-        # если форма валидна
-        if form.is_valid():
-            # создаём объект пользователя без записи в ДБ
-            new_user = form.save(commit=False)
-            # хешируем пароль
-            new_user.set_password(form.cleaned_data['password'])
-            # сохраняем пользователя в ДБ
-            new_user.save()
-            login(request, new_user)
-            context = {'title':'Регистрация завершена', 'new_user': new_user}
-            return render(request, template_name='users/registration_done.html', context=context)
-    # Если метод GET (страница с пустой формой регистрации)
-    form = RegistrationForm()
-    context = {'title':'Регистрация пользователя', 'register_form': form}
-    return render(request, template_name='users/registration.html', context=context)
+        try:
+            # 1. Получаем JSON из тела запроса
+            data = json.loads(request.body)
+
+            # 2. Передаём данные в форму
+            form = RegistrationForm(data)
+
+            # 3. Проверяем валидность
+            if form.is_valid():
+                # 4. Сохраняем пользователя
+                user = form.save()  # пароль уже хешируется в save()
+
+                # 5. Автоматически логиним
+                login(request, user)
+
+                # 6. Возвращаем успех + URL для перехода (если нужно)
+                return JsonResponse({
+                    'success': True,
+                    'username': user.username,
+                    'url': '/'  # можно изменить на profile или куда хочешь
+                })
+
+            else:
+                # 7. Если ошибка — возвращаем ошибки формы
+                return JsonResponse({
+                    'success': False,
+                    'errors': form.errors
+                }, status=400)
+
+        except Exception as e:
+            # 8. Ошибка при разборе JSON или другая ошибка
+            return JsonResponse({
+                'success': False,
+                'error': 'Некорректные данные'
+            }, status=400)
+
+    # Если GET — можно вернуть 405 (метод не поддерживается)
+    return JsonResponse({'error': 'Метод не поддерживается'}, status=405)
 
 def log_in(request):
     # создание формы
