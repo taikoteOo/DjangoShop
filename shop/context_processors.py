@@ -20,9 +20,9 @@ def register(request):
             # сохраняем пользователя в ДБ
             new_user.save()
             login(request, new_user)
-            context = {'title':'Регистрация завершена', 'new_user': new_user}
-            return render(request, template_name='users/registration_done.html', context=context)
+            response_data = {'result': 'success'}
+            return JsonResponse(response_data)
     # Если метод GET (страница с пустой формой регистрации)
     form = RegistrationForm()
-    context = {'title':'Регистрация пользователя', 'register_form': form}
+    response_data = {'result': 'success'}
     return JsonResponse(response_data)
