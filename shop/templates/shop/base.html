@@ -31,7 +31,14 @@
 <div class="pop_up" id='pop_up'>
     <div class="pop_up_container">
         <div class="pop_up_body" id="pop_up_body">
-
+            <div class="forms">
+                <h3>Регистрация пользователя</h3>
+                <form method="post" enctype="multipart/form-data">
+                    {%csrf_token%}
+                    {{register_form.as_p}}
+                    <button type="submit">Зарегестрироваться</button>
+                </form>
+            </div>
             <div class="pop_up_close" id="pop_up_close">&#10006</div>
         </div>
     </div>
