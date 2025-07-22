@@ -61,7 +61,7 @@
         {% if not request.user.id %}
         <a href="#" class="btn-blue" id="newOrder">Оформить заказ</a>
         {% else %}
-        <a href="#" class="btn-blue" id="newOrderUser">Оформить</a>
+        <a href="{% url 'orders:new_order' %}" class="btn-blue" id="newOrderUser">Оформить</a>
         {% endif %}
     </div>
 </div>
