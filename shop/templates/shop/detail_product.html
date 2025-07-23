@@ -23,18 +23,19 @@
             </div>
             <p class="product-description">{{ product.description }}</p>
             <p class="product-price">Цена: <strong>{{ product.price }} ₽</strong></p>
-            <a href="{% url 'cart:cart_add' product.slug %}">
-                    <img class="icon" src="{% static 'img/icon/cart.png' %}">
-            </a>
+            {% if not in_cart %}
+                <a href="{% url 'cart:cart_add' product.slug %}">
+                        <img class="icon" src="{% static 'img/icon/cart.png' %}">
+                </a>
+            {% else %}
+            <p>в корзине</p>
+            {% endif %}
             <a href="{% url 'shop:like_add' slug=product.slug %}">
                 <img class="icon {% if liked %}liked{% endif %}"
                      id="like"
                      src="{% if liked %}{% static 'img/icon/like_on.png' %}{% else %}{% static 'img/icon/like_off.png' %}{% endif %}"
                      data-off="{% static 'img/icon/like_off.png' %}"
                      data-on="{% static 'img/icon/like_on.png' %}">
-            </a>
-            <a href="{% url 'shop:like_add' slug=product.slug %}">
-                в избранное
             </a>
             <div class="product-meta">
             <p>ID товара: {{ product.pk }}</p>

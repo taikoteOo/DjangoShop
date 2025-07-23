@@ -14,18 +14,15 @@ closePopUp.addEventListener('click', () => {
 const registerSendBtn = document.querySelector("#register");
 
 async function registerSend(event) {
-    event.preventDefault();  // ❗ ВАЖНО: отменяем стандартное поведение кнопки
+    event.preventDefault();
 
     const myForm = event.target.parentElement;
-
-    // Исправлено: было .birthday,value → .birthday.value
     const username = myForm.username.value;
     const birthday = myForm.birthday.value;
     const email = myForm.email.value;
     const password = myForm.password.value;
-    const password2 = myForm.password2.value;  // 🔁 Не забудь второй пароль!
+    const password2 = myForm.password2.value;
 
-    // Добавляем password2 в данные!
     let userInfo = {
         "username": username,
         "birthday": birthday,

@@ -5,9 +5,11 @@ from  django.views.generic import (CreateView,
                                    ListView,
                                    UpdateView,
                                    DeleteView)
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+
 from .forms import CategoryCreateForm, ProductCreateForm, BreweryCreateForm
 from .models import Category, Product, Brewery, LikeUser, LikeItem
-from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from cart.views import ProductCartUser
 
 
 ################   АДМИНКА   ################
@@ -139,7 +141,9 @@ class ProductDetailClientView(DetailView):
         context['is_products_page'] = True
         if self.request.user.is_authenticated:
             like = ProductLikeUser(self.request)
+            cart = ProductCartUser(self.request)
             context['liked'] = product.id in like.like_ids
+            context['in_cart'] = product.id in cart.cart_ids
         else:
             context['liked'] = False
 

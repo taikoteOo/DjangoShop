@@ -12,7 +12,7 @@
     font-size: 120%;
 }
 
-#prod_quantity, #id_description {
+.prod_quantity, #id_description {
   color: #0a0a0a;
 }
 

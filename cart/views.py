@@ -1,4 +1,9 @@
+import json
+
 from django.shortcuts import render, get_object_or_404, redirect
+from django.http.response import JsonResponse, HttpResponse
+from django.views.decorators.http import require_POST
+from django.views.decorators.csrf import csrf_exempt
 from decimal import Decimal
 
 from shop.models import Product
@@ -100,6 +105,9 @@ class ProductCartUser:
         self.cart = {}
         for item in products_in_cart:
             self.cart[str(item.product.id)] = {'quantity': item.quantity, 'price': item.product.price}
+        self.cart_ids = list(
+            products_in_cart.values_list('product_id', flat=True)
+        )
 
     def add(self, product, quantity=1, override_quantity=False):
         # получаем id товара из объекта товара
@@ -139,6 +147,11 @@ class ProductCartUser:
         cart_user = CartUser.objects.get(user=request.user)
         cart_item = CartItem.objects.get(cart=cart_user, product=product)
         cart_item.delete()
+
+    # удаление всех товаров из корзины
+    def clear(self):
+        CartItem.objects.filter(cart=self.user_cart).delete()
+        self.cart.clear()
 
     def __iter__(self):
         product_ids = self.cart.keys()
@@ -195,15 +208,47 @@ def remove_product(request, product_id):
 
 # очистка корзины
 def remove_cart(request):
-    cart = Cart(request)
+    cart = ProductCartUser(request)
     cart.clear()
     return redirect('cart:cart_detail')
 
+@csrf_exempt
 def update_cart_by_front(request):
-    pass
+    data = json.loads(request.body)
+    print(data)
+    print(type(data))
+    product_id = data.get('productIdValue')
+    quantity = data.get('quantityValue')
+
+    if product_id:
+        if request.user.id:
+            cart = ProductCartUser(request)
+        else:
+            cart = Cart(request)
+
+        product = get_object_or_404(Product, pk=int(product_id))
+        cart.add(product=product, quantity=int(quantity), override_quantity=True)
+        print('ok', cart.cart)
+        response_data = {'result': 'success'}
+    else:
+        response_data = {'result': 'failed'}
+
+    return JsonResponse(response_data)
 
 def get_cart_length(request):
     pass
 
+@csrf_exempt
 def remove_product_ajax(request):
-    pass
+    data = json.loads(request.body)
+    product_id = data.get('productIdValue')
+    product = get_object_or_404(Product, pk=product_id)
+    if request.user.id:
+        cart = ProductCartUser(request)
+        cart.remove(product_id, request)
+    else:
+        cart = Cart(request)
+        cart.remove(product)
+
+    response_data = {'result': 'success'}
+    return JsonResponse(response_data)

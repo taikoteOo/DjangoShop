@@ -37,17 +37,20 @@
                 <span id="productPrice">{{ product.price|floatformat:0}}</span> руб.
             </td>
             <td>
-                <input id="prod_quantity" name="prod_quantity" type="number" min="1"
+                <input class="prod_quantity" name="prod_quantity" type="number" min="1"
                        max="100000" value="{{ item.quantity }}">
             </td>
             <td>
                 <span id="itemPrice">{{ item.total_price|floatformat:0 }}</span> руб.
             </td>
             <td>
-                <a href="{% url 'cart:remove_product' product.id %}">
-                    <img class="icon" src="{% static 'img/icon/remove.png' %}">
-                </a>
+                <span class="removeFetch"><img class="icon" src="{% static 'img/icon/remove.png' %}"></span>
             </td>
+<!--            <td>-->
+<!--                <a href="{% url 'cart:remove_product' product.id %}">-->
+<!--                    <img class="icon" src="{% static 'img/icon/remove.png' %}">-->
+<!--                </a>-->
+<!--            </td>-->
         </tr>
         {% endwith %}
     {% endfor %}
@@ -69,3 +72,7 @@
 <h3 class="empty">Корзина пуста</h3>
 {% endif %}
 {% endblock content %}
+
+{% block script %}
+<script src="{% static 'js/cart.js' %}" type="text/javascript"></script>
+{% endblock script %}

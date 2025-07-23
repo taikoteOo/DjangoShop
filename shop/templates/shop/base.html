@@ -23,7 +23,11 @@
             <div class="menu-item"><a href="{% url 'users:login' %}">Вход</a></div>
             <div class="menu-item"><div class="button"><a href="#" id="open_pop_up">Регистрация</a></div></div>
         {% else %}
-            <div class="menu-item"><a href="{% url 'cart:cart_detail' %}" class="{% if request.path == '/cart/detail/' %}active{% endif %}">Корзина</a></div>
+            {% if cart|length != 0 %}
+                <div class="menu-item"><a href="{% url 'cart:cart_detail' %}" class="{% if request.path == '/cart/detail/' %}active{% endif %}">Корзина (<span id="cartLengthHeader">{{cart|length}}</span>)</a></div>
+            {% else %}
+                <div class="menu-item"><a href="{% url 'cart:cart_detail' %}" class="{% if request.path == '/cart/detail/' %}active{% endif %}">Корзина <span id="cartLengthHeader"></a></div>
+            {% endif %}
             <div class="menu-item"><a href="{% url 'users:profile' pk=user.pk %}" class="{% if is_profile_page %}active{% endif %}">Личный кабинет</a></div>
         {% endif %}
     </div>

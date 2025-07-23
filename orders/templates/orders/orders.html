@@ -34,8 +34,8 @@
     {% for order in orders %}
         <div class="order-item">
             <div class="order-number"><a href="{% url 'orders:order_detail' order.number %}"> {{order.number}}</a></div>
-            <div class="order-payment">{{order.payment}}</div>
-            <div class="order-delivery">{{order.delivery}}</div>
+            <div class="order-payment">{{order.get_payment_display}}</div>
+            <div class="order-delivery">{{order.get_delivery_display}}</div>
             <div class="order-date">{{order.created_at}}</div>
         </div>
     {% endfor %}
