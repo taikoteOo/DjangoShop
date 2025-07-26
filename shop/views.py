@@ -150,7 +150,11 @@ class ProductDetailClientView(DetailView):
         return context
 
 def index(request):
-    return render(request, template_name='shop/index.html')
+    featured_beers = Product.objects.all().order_by('-created_ad', '-id')[:6]
+    context = {
+        'featured_beers': featured_beers,
+    }
+    return render(request, template_name='shop/index.html', context=context)
 
 
 # Класс избранного

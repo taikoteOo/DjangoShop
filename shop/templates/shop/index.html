@@ -1,0 +1,103 @@
+{% extends 'shop/base.html' %}
+{% load static %}
+{% block title %}
+<title>Бар Эклектика</title>
+{% endblock title %}
+{% block link %}
+<link rel="stylesheet" href="{% static 'css/index.css' %}">
+{% endblock link %}
+
+{% block content %}
+
+<!-- Hero Section -->
+<section class="hero-section">
+    <div class="wrapper">
+        <div class="hero-content">
+            <h1 class="hero-title">Бар Эклектика</h1>
+            <p class="hero-subtitle">
+                ~250 сортов пива, закуски, настолки, дартс, кикер, PS, мини-библиотека, тепло и уют :)
+            </p>
+            <div class="hero-buttons">
+                <a href="{% url 'shop:beers' %}" class="btn">Наше пиво</a>
+                <a href="#" class="btn">Как найти нас</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- About Section -->
+<section class="about-section">
+    <div class="wrapper">
+        <div class="about-container">
+            <div class="about-text">
+                <h2 class="section-title">О нашем баре</h2>
+                <p>
+                    Бар Эклектика — это место, где собираются ценители хорошего пива и дружеской атмосферы.
+                    Мы предлагаем огромный выбор из ~250 сортов пенного и разнообразные закуски, чтобы ваш вечер был идеальным.
+                </p>
+                <p>
+                    <strong>Хочешь пить? У нас есть Пенное!</strong><br>
+                    <strong>Проголодался? У нас есть снэки!</strong><br>
+                    <strong>Приуныл? У нас есть Пенное!</strong>
+                </p>
+                <p>
+                    Помимо отличного пива, у нас вы найдете множество развлечений: настольные игры, дартс, кикер,
+                    PlayStation и даже мини-библиотеку для любителей почитать. Тепло и уют гарантированы!
+                </p>
+            </div>
+            <div class="about-image">
+                <img src="{% static 'img/inter_bar.jpeg' %}"
+                     alt="Бар Эклектика интерьер" />
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Featured Beers -->
+<section class="beers-section">
+    <div class="wrapper">
+        <h2 class="section-title text-center">Наше пиво</h2>
+        <div class="product-grid">
+            {% for beer in featured_beers %}
+                <div class="product-card-all">
+                    <a href="{% url 'shop:product_detail' slug=beer.slug %}">
+                        <div class="product-item__image">
+                            {% if beer.image %}
+                                <img src="{{ beer.image.url }}" alt="{{ beer.name }}" width="200">
+                            {% else %}
+                                <img src="{% static 'img/no_image.jpg' %}" alt="Нет изображения" width="150">
+                            {% endif %}
+                        </div>
+                        <div class="product-item__name">{{ beer.name }}</div>
+                        <div class="product-item__price">{{ beer.price }} ₽</div>
+                    </a>
+                </div>
+            {% endfor %}
+        </div>
+        <div class="text-center">
+            <a href="{% url 'shop:beers' %}" class="btn btn-dark">
+                Смотреть все сорта
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- CTA Section -->
+<section class="cta-section">
+    <div class="wrapper">
+        <div class="cta-content">
+            <h2 class="cta-title">Ждём вас в гости!</h2>
+            <p class="cta-subtitle">Проспект Маршала Блюхера 9 корпус 1</p>
+            <div class="cta-buttons">
+                <a href="{% url 'shop:beers' %}" class="btn-dark">Посмотреть меню</a>
+                <a href="#" class="btn-dark">Как нас найти</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock content %}
+
+{% block script %}
+<script src="{% static 'js/index.js' %}" type="text/javascript"></script>
+{% endblock script %}
