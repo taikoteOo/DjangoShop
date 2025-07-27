@@ -67,13 +67,6 @@
 </div>
 
 <div class="content">
-        {% if messages %}
-    <div class="messages">
-        {% for message in messages %}
-        <div class="alert alert-{{ message.tags }}">{{ message }}</div>
-        {% endfor %}
-    </div>
-    {% endif %}
     {% block content %}
     {% endblock content %}
 </div>
@@ -122,6 +115,22 @@
     <div><h3>© Эклектика - бар интересного пива, 2019-{% now "Y" %}</h3></div>
 </footer>
 <script src="{% static 'js/pop-up.js' %}" type="text/javascript"></script>
+<script>
+// Проверяем, какие сообщения попали в JS
+const djangoMessages = [
+    {% for message in messages %}
+        "{{ message|escapejs }}",
+    {% endfor %}
+];
+
+console.log("djangoMessages:", djangoMessages);
+
+if (djangoMessages.length > 0) {
+    alert(djangoMessages.join("\n"));
+} else {
+    console.log("Сообщений для alert нет");
+}
+</script>
 {% block script %}
 {% endblock script %}
 </body>

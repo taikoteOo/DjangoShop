@@ -1,6 +1,10 @@
 {% extends 'shop/base.html' %}
 {% load static %}
 
+{% block title %}
+<title>Корзина</title>
+{% endblock title %}
+
 {% block content %}
 {% if cart|length != 0 %}
 <table class="cart-table">
@@ -57,10 +61,10 @@
 </table>
 <div style="width:80%; text-align:justify; margin:0 auto; padding-top:50px">
     <div>Товаров в корзине: <span id="cartLength">{{ cart|length }}</span></div>
-    <div>Cумма товаров в корзине: <span id="totalPriceCart">{{cart.get_total_price|floatformat:0 }}</span> руб.
+    <div style='padding-bottom: 10px;'>Cумма товаров в корзине: <span id="totalPriceCart">{{cart.get_total_price|floatformat:0 }}</span> руб.
     </div>
     <a href="{% url 'cart:remove_cart' %}" class="btn">Очистить корзину</a>
-    <div style="padding-top:10px">
+    <div style="padding-top:10px" class="btn">
         {% if not request.user.id %}
         <a href="#" class="btn-blue" id="newOrder">Оформить заказ</a>
         {% else %}

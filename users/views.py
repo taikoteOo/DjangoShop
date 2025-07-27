@@ -8,9 +8,10 @@ from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 
 import json
+import time
 from shopproject.settings import LOGIN_REDIRECT_URL
 from .models import CustomUser
-from users.forms import RegistrationForm, CustomPasswordChangeForm, LoginForm, ProfileForm
+from users.forms import RegistrationForm, CustomPasswordChangeForm, LoginForm, ProfileForm, PhotoForm
 
 
 @csrf_exempt
@@ -126,10 +127,23 @@ def change_profile(request, pk):
         form = ProfileForm(initial={
             'username': user.username,
             'email': user.email,
-            'image': user.image,
             'first_name': user.first_name,
             'last_name': user.last_name,
             'phone': user.phone
         })
     context = {'form': form, 'is_profile_page': True, 'is_profile_change': True}
     return render(request, template_name='users/change_profile.html', context=context)
+
+def change_photo(request, pk):
+    user = get_object_or_404(CustomUser, pk=pk)
+    if request.method == 'POST':
+        form = PhotoForm(request.POST, request.FILES, instance=user)
+        if form.is_valid():
+            form.save(request.user)
+            messages.success(request, 'Данные успешно изменены')
+    else:
+        form = PhotoForm(initial={
+            'image': user.image,
+        })
+    context = {'form': form, 'user': user, 'is_profile_page': True, 'is_profile_change': True}
+    return render(request, template_name='users/change_photo.html', context=context)

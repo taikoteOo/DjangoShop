@@ -1,5 +1,9 @@
 {% extends 'shop/base.html' %}
 
+{% block title %}
+<title>Редактирование профиля</title>
+{% endblock title %}
+
 {% block content %}
 <diV class="profile_content">
     {% include 'users/profile_base.html' %}
@@ -8,9 +12,9 @@
         <form method="post" enctype="multipart/form-data">
             {%csrf_token%}
             {{form.as_p}}
-            <button type="submit">Сохранить</button>
+            <button type="submit" class="btn">Сохранить</button>
             <a href="{%url 'users:change-password' %}">
-            <button type="button" style="color: #0a0a0a;">Сменить пароль</button>
+            <button type="button" class="btn">Сменить пароль</button>
             </a>
         </form>
     </div>

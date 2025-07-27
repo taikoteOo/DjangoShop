@@ -3,11 +3,13 @@
 {% block content %}
 
 <div class="profile">
-    {% if user.image %}
-        <img src="{{user.image.url}}" class="photo">
-    {% else %}
-        <img src="{% static 'img/no_photo.jpg' %}" class="photo">
-    {% endif %}
+    <a href="{%url 'users:change-photo' pk=user.pk %}">
+        {% if user.image %}
+            <img src="{{user.image.url}}" class="photo">
+        {% else %}
+            <img src="{% static 'img/no_photo.jpg' %}" class="photo">
+        {% endif %}
+    </a>
     <div class="profile_username"><a href="{%url 'users:profile' pk=user.pk %}">{{user.username}}</a></div>
     <div class='profile_nav_item'><a href="{%url 'users:change-profile' pk=user.pk %}" class="{% if is_profile_change %}active{% endif %}">Редактировать</a></div>
     <div class='profile_nav_item'><a href="{% url 'shop:like_detail' %}" class="{% if request.path == '/like/' %}active{% endif %}">Избранное</a></div>

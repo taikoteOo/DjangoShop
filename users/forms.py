@@ -109,3 +109,13 @@ class ProfileForm(UserChangeForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields.pop('password')
+
+class PhotoForm(forms.ModelForm):
+    class Meta:
+        model = CustomUser
+        fields = ['image']
+        widgets = {
+            'image': forms.FileInput(attrs={
+                'style': 'display: none;',  # скрываем стандартный input
+            })
+        }

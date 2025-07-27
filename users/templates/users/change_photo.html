@@ -1,0 +1,35 @@
+{% extends 'shop/base.html' %}
+{% load static %}
+
+{% block title %}
+<title>Изменить фото</title>
+{% endblock title %}
+
+{% block content %}
+<div class="profile_content">
+    {% include 'users/profile_base.html' %}
+
+    <div class="profile-photo">
+        <h3 style="padding-bottom: 10px;">Изменить фото профиля</h3>
+
+        <img id="previewImage" src="{% if user.image %}{{ user.image.url }}?v={{ user.pk }}{% else %}{% static 'img/no_photo.jpg' %}{% endif %}"
+             class="photo" alt="Фото профиля">
+
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.image }}  <!-- Скрытый input -->
+
+            <!-- Кастомная кнопка -->
+            <label for="id_image" class="btn">
+                Выбрать новое фото
+            </label>
+
+            <button type="submit" class='btn'>Сохранить</button>
+        </form>
+    </div>
+</div>
+{% endblock content %}
+
+{% block script %}
+<script src="{% static 'js/photo.js' %}" type="text/javascript"></script>
+{% endblock script %}

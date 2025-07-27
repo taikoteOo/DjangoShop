@@ -196,6 +196,16 @@ footer {
     background-color: rgba(0,0,0,.8);
 }
 
+#pop_up3 {
+    transform: translateY(-44.5%) translateX(29%) scale(0);
+}
+
+#pop_up3.active {
+    z-index: 5;
+    transform: translateY(0%) translateX(0%) scale(100%);
+    background-color: rgba(0,0,0,.8);
+}
+
 .pop_up_container {
     display: flex;
     width: 100%;
@@ -413,7 +423,35 @@ footer {
 .photo {
     border-radius: 100px;
     border: 5px solid #0a0a0a;
-    width: 100%;
+    width: 150px;
+}
+
+.profile-photo {
+    padding-left: 5%;
+    width: 80%;
+    text-align: center;
+}
+
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 24px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    border: 2px solid #ffc107;
+    background: transparent;
+    color: #ffc107;
+}
+
+.btn:hover {
+    background: #ffc107;
+    color: #1d1d1d;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(255, 193, 7, 0.3);
 }
 
 .profile_content {
@@ -451,6 +489,10 @@ footer {
     text-align:justify;
     margin:0 auto;
     padding: 15px 0;
+}
+
+.removeFetch:hover {
+    cursor: pointer;
 }
 
 .orders {
