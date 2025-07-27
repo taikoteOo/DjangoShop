@@ -75,7 +75,10 @@ def new_order(request):
 @login_required
 def orders_list(request):
     orders = Order.objects.filter(user=request.user)
-    context = {"orders": orders}
+    context = {"orders": orders,
+               'is_profile_page': True,
+               'is_order_change': True,
+               }
 
     return render(request, template_name="orders/orders.html", context=context)
 
@@ -86,7 +89,11 @@ def order_detail(request, number):
     if request.user != order.user:
         raise PermissionDenied
     order_items = order.order_items.all()
-    context = {"order": order, "order_items": order_items}
+    context = {"order": order,
+               "order_items": order_items,
+               'is_profile_page': True,
+               'is_order_change': True,
+               }
     return render(request, template_name="orders/order_detail.html", context=context)
 
 

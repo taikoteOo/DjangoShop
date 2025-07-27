@@ -19,7 +19,7 @@
             </p>
             <div class="hero-buttons">
                 <a href="{% url 'shop:beers' %}" class="btn">Наше пиво</a>
-                <a href="#" class="btn">Как найти нас</a>
+                <a href="https://yandex.ru/maps/-/CHSdVWkW" class="btn" target="_blank">Как найти нас</a>
             </div>
         </div>
     </div>
@@ -30,10 +30,14 @@
     <div class="wrapper">
         <div class="about-container">
             <div class="about-text">
-                <h2 class="section-title">О нашем баре</h2>
+                <h2 class="section-title">О нас</h2>
                 <p>
-                    Бар Эклектика — это место, где собираются ценители хорошего пива и дружеской атмосферы.
-                    Мы предлагаем огромный выбор из ~250 сортов пенного и разнообразные закуски, чтобы ваш вечер был идеальным.
+                    <b>«Эклектика» — больше, чем просто бар.</b>
+                </p>
+                <p>
+                    Это уютное пространство, где встречаются ценители пенного, хорошего настроения и тёплой компании.
+                    В нашем меню — более 250 сортов пива со всего света и вкусные закуски на любой вкус.
+                    Здесь легко провести идеальный вечер — с друзьями или в одиночестве, в шумной компании или в расслабленной атмосфере.
                 </p>
                 <p>
                     <strong>Хочешь пить? У нас есть Пенное!</strong><br>
@@ -41,13 +45,13 @@
                     <strong>Приуныл? У нас есть Пенное!</strong>
                 </p>
                 <p>
-                    Помимо отличного пива, у нас вы найдете множество развлечений: настольные игры, дартс, кикер,
-                    PlayStation и даже мини-библиотеку для любителей почитать. Тепло и уют гарантированы!
+                    А ещё у нас: настольные игры, дартс, кикер, PlayStation, мини-библиотека и
+                    много поводов задержаться подольше. «Эклектика» — это тепло, душевно и по-настоящему своё.
                 </p>
             </div>
-            <div class="about-image">
-                <img src="{% static 'img/inter_bar.jpeg' %}"
-                     alt="Бар Эклектика интерьер" />
+            <div class="about-images">
+                <img src="{% static 'img/inter_bar.jpeg' %}" alt="Интерьер бара 1" class="about-img img-left">
+                <img src="{% static 'img/inter_bar2.jpeg' %}" alt="Интерьер бара 2" class="about-img img-right">
             </div>
         </div>
     </div>
@@ -90,7 +94,7 @@
             <p class="cta-subtitle">Проспект Маршала Блюхера 9 корпус 1</p>
             <div class="cta-buttons">
                 <a href="{% url 'shop:beers' %}" class="btn-dark">Посмотреть меню</a>
-                <a href="#" class="btn-dark">Как нас найти</a>
+                <a href="https://yandex.ru/maps/-/CHSdVWkW" class="btn-dark" target="_blank">Как нас найти</a>
             </div>
         </div>
     </div>

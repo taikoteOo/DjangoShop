@@ -68,6 +68,7 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
                 'shop.context_processors.register',
                 'shop.context_processors.cart',
+                'shop.context_processors.log_in',
                 'orders.context_processors.quick_order_form',
             ],
         },

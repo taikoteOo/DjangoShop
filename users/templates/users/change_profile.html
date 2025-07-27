@@ -3,7 +3,7 @@
 {% block content %}
 <diV class="profile_content">
     {% include 'users/profile_base.html' %}
-    <div class="forms">
+    <div class="profile-form">
         <h3>Редактирование профиля</h3>
         <form method="post" enctype="multipart/form-data">
             {%csrf_token%}

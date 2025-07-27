@@ -55,27 +55,39 @@ def register(request):
     # Если GET — можно вернуть 405 (метод не поддерживается)
     return JsonResponse({'error': 'Метод не поддерживается'}, status=405)
 
+@csrf_exempt
 def log_in(request):
-    # создание формы
-    form = LoginForm(request, request.POST)
-    # проверка формы
-    if form.is_valid():
-        # получение логина и пароля формы
-        username = form.cleaned_data['username']
-        password = form.cleaned_data['password']
-        # аутентификация пользователя
-        # проверка существования пользователя и корректности пароля
-        user = authenticate(username=username, password=password)
-        # если такой пользователь существует и пароль верный
-        if user:
-            # авторизация пользователя
-            login(request, user)
-            # получение дальнейшего маршрута после входа на сайт
-            # next - путь, откуда пришёл пользователь на страницу входа
-            url = request.GET.get('next', LOGIN_REDIRECT_URL)
-            return redirect(url)
-    context = {'form': form}
-    return render(request, template_name='users/login.html', context=context)
+    if request.method == 'POST':
+        try:
+            data = json.loads(request.body)
+            username = data.get('username')
+            password = data.get('password')
+
+            # Проверяем данные
+            form = AuthenticationForm(request, data={'username': username, 'password': password})
+
+            if form.is_valid():
+                user = form.get_user()
+                login(request, user)
+
+                return JsonResponse({
+                    'success': True,
+                    'username': user.username,
+                    'url': request.GET.get('next', '/')  # можно использовать LOGIN_REDIRECT_URL
+                })
+            else:
+                return JsonResponse({
+                    'success': False,
+                    'errors': form.errors
+                }, status=400)
+
+        except Exception as e:
+            return JsonResponse({
+                'success': False,
+                'error': 'Некорректные данные'
+            }, status=400)
+
+    return JsonResponse({'error': 'Метод не поддерживается'}, status=405)
 
 @login_required
 def log_out(request):

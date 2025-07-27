@@ -67,7 +67,15 @@ class CustomPasswordChangeForm(PasswordChangeForm):
     )
 
 class LoginForm(AuthenticationForm):
-
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['username'].widget.attrs.update({
+            'autocomplete': 'off',
+            'autofocus': False,
+        })
+        self.fields['password'].widget.attrs.update({
+            'autocomplete': 'new-password',
+        })
     class Meta:
         model = CustomUser
         fields = ('username', 'password')
@@ -85,20 +93,17 @@ class ProfileForm(UserChangeForm):
         fields = (
             'username',
             'email',
-            'image',
             'first_name',
             'last_name',
             'phone'
         )
         labels = {
-            'image': 'Фото профиля',
             'first_name': 'Имя',
             'last_name': 'Фамилия',
             'phone': 'Номер телефона',
         }
         help_texts = {
             'username':'',
-            'image': ''
         }
 
     def __init__(self, *args, **kwargs):

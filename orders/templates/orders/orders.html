@@ -6,40 +6,33 @@
 {% endblock title %}
 
 {% block content %}
-<style>
-    .orders-header{
-        display: flex;
-        justify-content: space-around;
-        flex-direction: row;
-    }
-    .order-items{
-        display: flex;
-        justify-content: space-around;
-        flex-direction: column;
-    }
-    .order-item{
-        display: flex;
-        justify-content: space-around;
-    }
+<div class="profile_content">
+    {% include 'users/profile_base.html' %}
 
-</style>
-<div class="orders">
-    <div class="orders-header">
-        <div class="order-header">Номер заказа</div>
-        <div class="order-header">Способ оплаты</div>
-        <div class="order-header">Способ доставки</div>
-        <div class="order-header">Дата создания</div>
-    </div>
-    <div class="order-items">
-    {% for order in orders %}
-        <div class="order-item">
-            <div class="order-number"><a href="{% url 'orders:order_detail' order.number %}"> {{order.number}}</a></div>
-            <div class="order-payment">{{order.get_payment_display}}</div>
-            <div class="order-delivery">{{order.get_delivery_display}}</div>
-            <div class="order-date">{{order.created_at}}</div>
+    <div class="orders">
+        <h3>Мои заказы</h3>
+
+        <div class="orders-grid">
+            <!-- Заголовок -->
+            <div class="order-header"><b>Номер заказа</b></div>
+            <div class="order-header"><b>Способ оплаты</b></div>
+            <div class="order-header"><b>Способ доставки</b></div>
+            <div class="order-header"><b>Дата создания</b></div>
+
+            <!-- Заказы -->
+            {% for order in orders %}
+            <a href="{% url 'orders:order_detail' order.number %}" class="order-link">
+                <div class="order-cell">{{ order.number }}</div>
+                <div class="order-cell">{{ order.get_payment_display }}</div>
+                <div class="order-cell">{{ order.get_delivery_display }}</div>
+                <div class="order-cell">{{ order.created_at|date:"d.m.Y H:i" }}</div>
+            </a>
+            {% empty %}
+            <div class="order-cell" style="grid-column: span 4; text-align: center; color: #666;">
+                У вас пока нет заказов
+            </div>
+            {% endfor %}
         </div>
-    {% endfor %}
     </div>
 </div>
-
 {% endblock content %}

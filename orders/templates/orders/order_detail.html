@@ -7,34 +7,51 @@
 
 {% block content %}
 
-<style>
-  .order-item{
-        display: flex;
-        justify-content: space-around;
-    }
+<div class="profile_content">
+    {% include 'users/profile_base.html' %}
 
-  .item{
-    display: flex;
-    flex-direction: row;
-    gap: 20px;
-  }
+    <div class="order-detail-container">
+        <!-- Левая часть — информация о заказе -->
+        <div class="order-info">
+            <h3>Информация о заказе</h3>
+            <div class="order-info-row">
+                <strong>Номер:</strong> {{ order.number }}
+            </div>
+            <div class="order-info-row">
+                <strong>Оплата:</strong> {{ order.get_payment_display }}
+            </div>
+            <div class="order-info-row">
+                <strong>Доставка:</strong> {{ order.get_delivery_display }}
+            </div>
+            <div class="order-info-row">
+                <strong>Дата:</strong> {{ order.created_at|date:"d.m.Y H:i" }}
+            </div>
+        </div>
 
-</style>
+        <!-- Правая часть — товары -->
+        <div class="order-items-section">
+            <h3>Товары в заказе</h3>
+            <div class="order-items-grid">
+                <!-- Заголовки -->
+                <div class="order-items-header">Наименование</div>
+                <div class="order-items-header">Кол-во</div>
+                <div class="order-items-header">Цена</div>
+                <div class="order-items-header">Стоимость</div>
 
-<div class="order-item">
-    <div class="order-number">{{order.number}}</div>
-    <div class="order-payment">{{order.get_payment_display}}</div>
-    <div class="order-delivery">{{order.get_delivery_display}}</div>
-    <div class="order-date">{{order.created_at}}</div>
-</div>
-<hr>
-<h3>Товары в заказе:</h3>
-<br>
-{% for item in order_items %}
-    <div class="item">
-        <div>Наименование: {{ item.product.name }}</div>
-        <div>Количество: {{ item.quantity }}</div>
+                <!-- Товары -->
+                {% for item in order_items %}
+                    <div class="order-items-cell">{{ item.product.name }}</div>
+                    <div class="order-items-cell">{{ item.quantity }}</div>
+                    <div class="order-items-cell">{{ item.price }} ₽</div>
+                    <div class="order-items-cell">{{ item.total_price }} ₽</div>
+                {% endfor %}
+
+                <!-- Итого -->
+                <div class="order-items-cell" style="grid-column: 3; text-align: right;"><strong>Итого:</strong></div>
+                <div class="order-items-cell" style="grid-column: 4;"><strong>{{ order.get_total_cost }} ₽</strong></div>
+            </div>
+        </div>
     </div>
-{% endfor %}
+</div>
 
 {% endblock content %}

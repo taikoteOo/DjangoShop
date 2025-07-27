@@ -1,4 +1,4 @@
-from users.forms import RegistrationForm
+from users.forms import RegistrationForm, LoginForm
 from cart.views import Cart, ProductCartUser
 
 
@@ -12,3 +12,8 @@ def cart(request):
         return {'cart': ProductCartUser(request)}
 
     return {'cart': Cart(request)}
+
+def log_in(request):
+    return {
+        'login': LoginForm()
+    }

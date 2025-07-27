@@ -132,9 +132,9 @@ body {
     text-align: center;
 }
 
-/* About Section */
+/* === About Section === */
 .about-section {
-    padding: 60px 0;
+    padding: 80px 0;
     background: var(--bg-dark);
 }
 
@@ -150,12 +150,73 @@ body {
     min-width: 300px;
 }
 
-.about-image img {
+.about-text .section-title {
+    margin-bottom: 1.5rem;
+}
+
+.about-text p {
+    margin-bottom: 1rem;
+    line-height: 1.7;
+    color: var(--text-muted);
+}
+
+/* Блок с изображениями */
+.about-images {
+    flex: 1;
+    min-width: 300px;
+    display: flex;
+    justify-content: center;
+    gap: -20px; /* чтобы изображения перекрывались */
+    position: relative;
+}
+
+.about-img {
     width: 100%;
-    border-radius: var(--border-radius);
-    box-shadow: var(--box-shadow);
-    max-height: 400px;
+    max-width: 300px;
+    border-radius: 12px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
     object-fit: cover;
+    transition: transform 0.4s ease;
+}
+
+.img-left {
+    transform: rotate(-5deg);
+    z-index: 2;
+}
+
+.img-right {
+    transform: rotate(5deg);
+    z-index: 1;
+}
+
+/* При наведении — лёгкий эффект "оживления" */
+.about-images:hover .img-left,
+.about-images:hover .img-right {
+    transform: rotate(0deg);
+}
+
+/* Адаптив */
+@media (max-width: 768px) {
+    .about-container {
+        flex-direction: column;
+    }
+
+    .about-images {
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+    }
+
+    .about-img {
+        max-width: 100%;
+        width: 300px;
+    }
+
+    .img-left,
+    .img-right {
+        transform: none; /* убираем наклон на мобильных */
+        z-index: auto;
+    }
 }
 
 /* Beers Section */

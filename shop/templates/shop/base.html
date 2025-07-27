@@ -20,9 +20,8 @@
         <div class="logo-and-name"><a href="{% url 'shop:index' %}"><img src="{% static 'img/logo.svg' %}"></a></div>
         <div class="menu-item"><a href="{% url 'shop:index' %}" class="{% if request.path == '/' %}active{% endif %}">Главная</a></div>
         <div class="menu-item"><a href="{% url 'shop:beers' %}" class="{% if is_products_page %}active{% endif %}">Пиво</a></div>
-        <div class="menu-item"><a href="#" class="{% if request.path == '/events/' %}active{% endif %}">События</a></div>
         {% if not user.is_authenticated %}
-            <div class="menu-item"><a href="{% url 'users:login' %}">Вход</a></div>
+            <div class="menu-item"><div class="button"><a href="#" id="open_pop_up2">Вход</a></div></div>
             <div class="menu-item"><div class="button"><a href="#" id="open_pop_up">Регистрация</a></div></div>
         {% else %}
             {% if cart|length != 0 %}
@@ -47,6 +46,22 @@
                 </form>
             </div>
             <div class="pop_up_close" id="pop_up_close">&#10006</div>
+        </div>
+    </div>
+</div>
+
+<div class="pop_up" id='pop_up2'>
+    <div class="pop_up_container">
+        <div class="pop_up_body" id="pop_up_body2">
+            <div class="forms">
+                <h3>Вход в аккаунт</h3>
+                <form method="post" enctype="multipart/form-data">
+                    {%csrf_token%}
+                    {{login.as_p}}
+                    <button type="button" id="login">Войти</button>
+                </form>
+            </div>
+            <div class="pop_up_close" id="pop_up_close2">&#10006</div>
         </div>
     </div>
 </div>
