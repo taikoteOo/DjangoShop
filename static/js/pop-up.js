@@ -44,9 +44,8 @@ async function registerSend(event) {
 
         if (result.success) {
             alert('Регистрация успешно завершена!');
-            window.location.replace(result.url);  // переходим на главную
+            window.location.replace(result.url);
         } else {
-            // Если есть ошибки — можно вывести (пока просто alert)
             alert('Ошибки: ' + JSON.stringify(result.errors));
             console.log(result.errors);
         }
