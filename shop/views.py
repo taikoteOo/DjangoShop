@@ -126,8 +126,8 @@ class ProductsByCategoryListView(ListView):
     def get_queryset(self):
         slug = self.kwargs.get('slug')
         if not slug:
-            return Product.objects.all()
-        return Product.objects.filter(category__slug=slug)
+            return Product.objects.all().order_by('-created_at')
+        return Product.objects.filter(category__slug=slug).order_by('-created_at')
 
 class ProductDetailClientView(DetailView):
     model = Product
